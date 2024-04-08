@@ -120,3 +120,19 @@ Some of The Most Important SQL Commands
 
 **DROP INDEX** - deletes an index
 
+
+### The MySQL SELECT Statement.
+
+The SELECT statement is used to select data from a database.
+
+The data returned is stored in a result table, called the result-set.
+
+```
+SELECT * FROM table_name;
+```
+
+### SELECT * Example
+
+The following SQL statement selects ALL the columns from the "Customers" table:
+
+`SELECT * FROM Customers;`
