@@ -206,9 +206,72 @@ The ORDER BY keyword is used to sort the result-set in ascending or descending o
 
 The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
 
+
 #### ORDER BY Syntax
 ```
 SELECT column1, column2, ...
 FROM table_name
 ORDER BY column1, column2, ... ASC|DESC;
+```
+
+### The MySQL INSERT INTO Statement
+
+The INSERT INTO statement is used to insert new records in a table.
+
+#### INSERT INTO Syntax
+
+It is possible to write the INSERT INTO statement in two ways:
+
+1. Specify both the column names and the values to be inserted:
+```
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+```
+
+2. If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. However, make sure the order of the values is in the same order as the columns in the table. Here, the INSERT INTO syntax would be as follows
+
+```
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+```
+
+### What is a NULL Value?
+
+A field with a NULL value is a field with no value.
+
+If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value.
+
+#### A NULL value is different from a zero value or a field that contains spaces. A field with a NULL value is one that has been left blank during record creation!
+
+#### How to Test for NULL Values?
+
+It is not possible to test for NULL values with comparison operators, such as =, <, or <>.
+
+We will have to use the IS NULL and IS NOT NULL operators instea
+
+#### IS NULL SYNTAX
+```
+SELECT column_names
+FROM table_name
+WHERE column_name IS NULL;
+```
+
+#### IS NOT NULL SYNTAX
+
+```
+SELECT column_names
+FROM table_name
+WHERE column_name IS NOT NULL;
+```
+
+### The MySQL UPDATE Statement
+
+The UPDATE statement is used to modify the existing records in a table.
+
+#### UPDATE Syntax
+
+```
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
 ```
