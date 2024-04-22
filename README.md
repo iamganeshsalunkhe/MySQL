@@ -275,3 +275,259 @@ UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
 ```
+
+### The MySQL DELETE Statement
+The DELETE statement is used to delete existing records in a table.
+
+#### DELETE Syntax
+
+`DELETE FROM table_name WHERE condition;`
+
+#### Delete All Records
+
+It is possible to delete all rows in a table without deleting the table. This means that the table structure, attributes, and indexes will be intact:
+
+`DELETE FROM table_name;`
+
+### The MySQL LIMIT Clause
+
+The LIMIT clause is used to specify the number of records to return.
+
+The LIMIT clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
+
+#### LIMIT Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT number;
+```
+#### MySQL LIMIT Examples
+
+The following SQL statement selects the first three records from the "Customers" table:
+
+```
+SELECT * FROM Customers
+LIMIT 3;
+```
+
+##### What if we want to select records 4 - 6 (inclusive)?
+
+MySQL provides a way to handle this: by using OFFSET.
+
+The SQL query below says "return only 3 records, start on record 4 (OFFSET 3)":
+
+```
+SELECT * FROM Customers
+LIMIT 3 OFFSET 3;
+```
+
+
+### MySQL MIN() and MAX() Functions
+
+The MIN() function returns the smallest value of the selected column.
+
+The MAX() function returns the largest value of the selected column.
+
+#### MIN() Syntax
+```
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition;
+```
+
+#### MAX() Syntax
+```
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+```
+
+### MySQL COUNT(), AVG() and SUM() Functions
+
+The COUNT() function returns the number of rows that matches a specified criterion.
+
+#### COUNT() Syntax
+```
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+```
+
+#### AVG() Syntax 
+
+The AVG() function returns the average value of a numeric column. 
+
+```
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+```
+
+#### SUM() Syntax
+
+The SUM() function returns the total sum of a numeric column. 
+
+```
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+```
+
+
+### The MySQL LIKE Operator
+
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+There are two wildcards often used in conjunction with the LIKE operator:
+
+The percent sign (%) represents zero, one, or multiple characters
+The underscore sign (_) represents one, single character
+The percent sign and the underscore can also be used in combinations!
+
+#### LIKE Syntax
+
+```
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+```
+
+### MySQL Wildcard Characters
+
+A wildcard character is used to substitute one or more characters in a string.
+
+Wildcard characters are used with the LIKE operator. The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+![Screenshot 2024-04-22 125919](https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/9dcf0c36-4420-4d83-8d18-9ebc9b754308)
+
+The wildcards can also be used in combinations!
+
+Here are some examples showing different LIKE operators with '%' and '_' wildcards:
+
+
+
+![Screenshot 2024-04-22 125950](https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/4cf1adfa-284f-48b7-b2cd-c751269a993f)
+
+
+### The MySQL IN Operator
+The IN operator allows you to specify multiple values in a WHERE clause.
+
+The IN operator is a shorthand for multiple OR conditions.
+
+#### IN Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);
+```
+## OR 
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (SELECT STATEMENT);
+```
+
+
+### The MySQL BETWEEN Operator
+
+The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+
+The BETWEEN operator is inclusive: begin and end values are included.
+
+#### BETWEEN Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+```
+
+#### NOT BETWEEN Example
+
+To display the products outside the range of the previous example, use NOT BETWEEN:
+
+
+```
+SELECT * FROM Products
+WHERE Price NOT BETWEEN 10 AND 20;
+```
+
+#### BETWEEN with IN Example
+
+The following SQL statement selects all products with a price between 10 and 20. In addition; do not show products with a CategoryID of 1,2, or 3:
+
+
+```
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+```
+
+### MySQL Aliases
+
+Aliases are used to give a table, or a column in a table, a temporary name.
+
+Aliases are often used to make column names more readable.
+
+An alias only exists for the duration of that query.
+
+An alias is created with the AS keyword.
+
+#### Alias Column Syntax
+
+```
+SELECT column_name AS alias_name
+FROM table_name;
+```
+#### Alias Table Syntax
+
+```
+SELECT column_name(s)
+FROM table_name AS alias_name;
+```
+
+### MySQL Joining Tables
+
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Let's look at a selection from the "Orders" table:
+
+![Screenshot 2024-04-22 130656](https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/d0308ee8-87b1-4278-a73d-58eaf2aec7a9)
+
+Then, look at a selection from the "Customers" table:
+
+![Screenshot 2024-04-22 130711](https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/cb22c30e-a637-47f7-acdf-5ba69fa5a10b)
+
+
+##### Notice that the "CustomerID" column in the "Orders" table refers to the "CustomerID" in the "Customers" table. The relationship between the two tables above is the "CustomerID" column.
+
+Then, we can create the following SQL statement (that contains an INNER JOIN), that selects records that have matching values in both tables:
+
+```
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+```
+
+and it will produce something like this:
+
+![Screenshot 2024-04-22 130734](https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/bcf44387-a897-458f-8c73-698443bb9f7a)
+
+
+##### Supported Types of Joins in MySQL
+
+INNER JOIN: Returns records that have matching values in both tables
+
+LEFT JOIN: Returns all records from the left table, and the matched records from the right table
+
+RIGHT JOIN: Returns all records from the right table, and the matched records from the left table
+
+CROSS JOIN: Returns all records from both tables
+
+
+
+
