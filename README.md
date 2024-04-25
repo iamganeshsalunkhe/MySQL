@@ -529,5 +529,310 @@ RIGHT JOIN: Returns all records from the right table, and the matched records fr
 CROSS JOIN: Returns all records from both tables
 
 
+### MySQL INNER JOIN Keyword
 
+The INNER JOIN keyword selects records that have matching values in both tables.
+
+
+#### INNER JOIN Syntax
+```
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+```
+
+### MySQL LEFT JOIN Keyword
+
+The LEFT JOIN keyword returns all records from the left table (table1), and the matching records (if any) from the right table (table2).
+#### LEFT JOIN Syntax
+
+```
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+```
+
+### MySQL RIGHT JOIN Keyword
+
+The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records (if any) from the left table (table1).
+
+#### RIGHT JOIN Syntax
+```
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+```
+
+### SQL CROSS JOIN Keyword
+
+The CROSS JOIN keyword returns all records from both tables (table1 and table2).
+
+#### CROSS JOIN Syntax
+```
+SELECT column_name(s)
+FROM table1
+CROSS JOIN table2;
+```
+
+### MySQL Self Join
+
+A self join is a regular join, but the table is joined with itself.
+
+#### Self Join Syntax
+```
+SELECT column_name(s)
+FROM table1 T1, table1 T2
+WHERE condition;
+```
+
+### The MySQL UNION Operator
+
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+
+Every SELECT statement within UNION must have the same number of columns.
+
+The columns must also have similar data types.
+
+The columns in every SELECT statement must also be in the same order.
+
+#### UNION Syntax
+```
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+```
+
+#### UNION ALL Syntax
+
+The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:
+```
+SELECT column_name(s) FROM table1
+UNION ALL
+SELECT column_name(s) FROM table2;
+```
+
+### The MySQL GROUP BY Statement
+
+The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+
+#### GROUP BY Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+```
+
+### The MySQL HAVING Clause
+
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+#### HAVING Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s);
+```
+
+### The MySQL EXISTS Operator
+
+The EXISTS operator is used to test for the existence of any record in a subquery.
+
+The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+#### EXISTS Syntax
+```
+SELECT column_name(s)
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM table_name WHERE condition);
+```
+
+### The MySQL ANY and ALL Operators
+
+The ANY and ALL operators allow you to perform a comparison between a single column value and a range of other values.
+
+
+#### The ANY operator:
+
+returns a boolean value as a result.
+
+returns TRUE if ANY of the subquery values meet the condition.
+
+ANY means that the condition will be true if the operation is true for any of the values in the range.
+
+#### ANY Syntax
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ANY
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+```
+
+#### The ALL operator:
+
+returns a boolean value as a result.
+
+returns TRUE if ALL of the subquery values meet the condition.
+
+is used with SELECT, WHERE and HAVING statements.
+
+#### ALL means that the condition will be true only if the operation is true for all values in the range.
+```
+ALL Syntax With SELECT
+SELECT ALL column_name(s)
+FROM table_name
+WHERE condition;
+```
+#### ALL Syntax With WHERE or HAVING
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ALL
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+```
+
+### The MySQL INSERT INTO SELECT Statement
+
+The INSERT INTO SELECT statement copies data from one table and inserts it into another table.
+
+The INSERT INTO SELECT statement requires that the data types in source and target tables matches.
+
+Note: The existing records in the target table are unaffected.
+
+#### INSERT INTO SELECT Syntax
+Copy all columns from one table to another table:
+```
+INSERT INTO table2
+SELECT * FROM table1
+WHERE condition;
+```
+Copy only some columns from one table into another table:
+
+```
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+```
+
+
+### The MySQL CASE Statement
+
+The CASE statement goes through conditions and returns a value when the first condition is met (like an if-then-else statement). So, once a condition is true, it will stop reading and return the result. If no conditions are true, it returns the value in the ELSE clause.
+
+If there is no ELSE part and no conditions are true, it returns NULL.
+
+#### CASE Syntax
+
+```
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+```
+
+### MySQL Comments
+
+Comments are used to explain sections of SQL statements, or to prevent execution of SQL statements.
+
+#### Single Line Comments
+
+Single line comments start with --.
+
+Any text between -- and the end of the line will be ignored (will not be executed).
+
+The following example uses a single-line comment as an explanation:
+
+```
+-- Select all:
+SELECT * FROM Customers;
+```
+The following example uses a single-line comment to ignore the end of a line:
+
+`SELECT * FROM Customers -- WHERE City='Berlin';`
+
+The following example uses a single-line comment to ignore a statement:
+
+```
+-- SELECT * FROM Customers;
+SELECT * FROM Products;`
+```
+
+
+### Multi-line Comments
+
+Multi-line comments start with /* and end with */.
+
+Any text between /* and */ will be ignored.
+
+The following example uses a multi-line comment as an explanation:
+
+```
+/*Select all the columns
+of all the records
+in the Customers table:*/
+SELECT * FROM Customers;
+```
+
+To ignore just a part of a statement, also use the /* */ comment.
+
+The following example uses a comment to ignore part of a line:
+
+`SELECT CustomerName, /*City,*/ Country FROM Customers;`
+
+The following example uses a comment to ignore part of a statement:
+
+
+```
+SELECT * FROM Customers WHERE (CustomerName LIKE 'L%'
+OR CustomerName LIKE 'R%' /*OR CustomerName LIKE 'S%'
+OR CustomerName LIKE 'T%'*/ OR CustomerName LIKE 'W%')
+AND Country='USA'
+ORDER BY CustomerName;
+```
+
+
+### MySQL Operators:
+
+#### MySQL Logical Oprators
+
+<img width="522" alt="Screenshot 2024-04-25 151723" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/92e6e153-34bf-473e-897a-e1cd09fb39d1">
+
+#### MySQL Compound Operators
+
+
+<img width="532" alt="Screenshot 2024-04-25 151846" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/7d9888fd-f120-4935-941b-f29ae55c59b4">
+
+#### MySQL Comparison Operators
+
+<img width="497" alt="Screenshot 2024-04-25 152000" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/ff871a82-2696-41a8-be62-310564c37cb5">
+
+#### MySQL Bitwise Operators
+
+
+<img width="569" alt="Screenshot 2024-04-25 152048" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/ede72df9-115b-4d3e-bedf-eeb56f479c3a">
+
+#### MySQL Arithmetic Operators
+
+<img width="519" alt="Screenshot 2024-04-25 152128" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/56dcc7e3-437e-4b2f-a698-559ef309aa32">
 
