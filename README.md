@@ -836,3 +836,82 @@ ORDER BY CustomerName;
 
 <img width="519" alt="Screenshot 2024-04-25 152128" src="https://github.com/iamganeshsalunkhe/MySQL/assets/143490640/56dcc7e3-437e-4b2f-a698-559ef309aa32">
 
+
+
+
+### The MySQL CREATE DATABASE Statement
+
+The CREATE DATABASE statement is used to create a new SQL database.
+
+Syntax:
+`CREATE DATABASE databasename;`
+
+### The MySQL DROP DATABASE Statement
+
+The DROP DATABASE statement is used to drop an existing SQL database.
+
+Syntax
+
+
+`DROP DATABASE databasename;`
+
+
+### The MySQL CREATE TABLE Statement
+The CREATE TABLE statement is used to create a new table in a database.
+
+Syntax
+```
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+```
+
+The column parameters specify the names of the columns of the table.
+
+The datatype parameter specifies the type of data the column can hold (e.g. varchar, integer, date, etc.).
+
+
+### The MySQL DROP TABLE Statement
+
+The DROP TABLE statement is used to drop an existing table in a database.
+
+Syntax
+
+`DROP TABLE table_name;`
+
+### MySQL TRUNCATE TABLE
+The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+Syntax
+
+`TRUNCATE TABLE table_name;`
+
+### MySQL ALTER TABLE Statement
+
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table
+
+#### ALTER TABLE - ADD Column
+To add a column in a table, use the following syntax:
+```
+ALTER TABLE table_name
+ADD column_name datatype;
+```
+
+#### ALTER TABLE - DROP COLUMN
+To delete a column in a table, use the following syntax (notice that some database systems don't allow deleting a column):
+```
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+
+#### ALTER TABLE - MODIFY COLUMN
+To change the data type of a column in a table, use the following syntax:
+```
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+```
