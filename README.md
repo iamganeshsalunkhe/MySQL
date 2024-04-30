@@ -1090,3 +1090,161 @@ ALTER TABLE Persons
 DROP PRIMARY KEY;
 ```
 
+### MySQL FOREIGN KEY Constraint
+
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+
+
+A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table
+
+
+### MySQL CHECK Constraint
+
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+#### CHECK on CREATE TABLE
+
+The following SQL creates a CHECK constraint on the "Age" column when the "Persons" table is created. The CHECK constraint ensures that the age of a person must be 18, or older:
+
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18)
+);
+```
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+);
+```
+
+#### CHECK on ALTER TABLE
+
+To create a CHECK constraint on the "Age" column when the table is already created, use the following SQL:
+
+```
+ALTER TABLE Persons
+ADD CHECK (Age>=18);
+```
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+```
+ALTER TABLE Persons
+ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');
+```
+
+#### DROP a CHECK Constraint
+To drop a CHECK constraint, use the following SQL:
+```
+ALTER TABLE Persons
+DROP CHECK CHK_PersonAge;
+```
+### MySQL DEFAULT Constraint
+The DEFAULT constraint is used to set a default value for a column.
+
+The default value will be added to all new records, if no other value is specified.
+
+#### DEFAULT on CREATE TABLE
+
+The following SQL sets a DEFAULT value for the "City" column when the "Persons" table is created:
+
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Sandnes'
+);
+```
+
+The DEFAULT constraint can also be used to insert system values, by using functions like CURRENT_DATE():
+
+```
+CREATE TABLE Orders (
+    ID int NOT NULL,
+    OrderNumber int NOT NULL,
+    OrderDate date DEFAULT CURRENT_DATE()
+);
+```
+
+
+#### DEFAULT on ALTER TABLE
+
+To create a DEFAULT constraint on the "City" column when the table is already created, use the following SQL:
+
+```
+ALTER TABLE Persons
+ALTER City SET DEFAULT 'Sandnes';
+```
+
+#### DROP a DEFAULT Constraint
+
+To drop a DEFAULT constraint, use the following SQL:
+
+```
+ALTER TABLE Persons
+ALTER City DROP DEFAULT;
+```
+
+### What is an AUTO INCREMENT Field?
+Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
+
+Often this is the primary key field that we would like to be created automatically every time a new record is inserted.
+
+##### MySQL AUTO_INCREMENT Keyword
+
+MySQL uses the AUTO_INCREMENT keyword to perform an auto-increment feature.
+
+By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
+
+The following SQL statement defines the "Personid" column to be an auto-increment primary key field in the "Persons" table:
+
+
+
+```
+CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+```
+
+To let the AUTO_INCREMENT sequence start with another value, use the following SQL statement:
+
+`ALTER TABLE Persons AUTO_INCREMENT=100;`
+
+### MySQL Dates
+
+##### The most difficult part when working with dates is to be sure that the format of the date you are trying to insert, matches the format of the date column in the database.
+
+As long as your data contains only the date portion, your queries will work as expected. However, if a time portion is involved, it gets more complicated.
+
+MySQL Date Data Types
+
+MySQL comes with the following data types for storing a date or a date/time value in the database:
+
+DATE - format YYYY-MM-DD
+DATETIME - format: YYYY-MM-DD HH:MI:SS
+TIMESTAMP - format: YYYY-MM-DD HH:MI:SS
+YEAR - format YYYY or YY
+
